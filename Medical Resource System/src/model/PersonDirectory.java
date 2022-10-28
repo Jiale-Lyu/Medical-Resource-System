@@ -4,11 +4,17 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Jiale Lyu
  */
-public class Doctor {
+public class PersonDirectory {
+    ArrayList<Person> personDirectory;
     
-    
+    PersonDirectory(){
+        personDirectory = new ArrayList<Person>();
+    }
+
 }

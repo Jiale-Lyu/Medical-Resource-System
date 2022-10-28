@@ -8,7 +8,6 @@ package model;
  *
  * @author Jiale Lyu
  */
-public class Doctor {
-    
+public class VitalSign {
     
 }
