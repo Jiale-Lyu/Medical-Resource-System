@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui;
+package ui.community;
 
 /**
  *
  * @author Jiale Lyu
  */
-public class EncounterJPanel extends javax.swing.JPanel {
+public class CommunityJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form encounterJPanel
+     * Creates new form CommunityJPanel
      */
-    public EncounterJPanel() {
+    public CommunityJPanel() {
         initComponents();
     }
 
@@ -30,11 +30,11 @@ public class EncounterJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 762, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
