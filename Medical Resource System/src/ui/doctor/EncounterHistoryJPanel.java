@@ -4,7 +4,13 @@
  */
 package ui.doctor;
 
+import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.StyleConstants;
+import model.Encounter;
+import model.EncounterHistory;
 
 /**
  *
@@ -16,11 +22,29 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
      * Creates new form EncounterHistoryJPanel
      */
     JPanel workArea;
-    public EncounterHistoryJPanel(JPanel workArea) {
+    EncounterHistory encounterHistory;
+    public EncounterHistoryJPanel(JPanel workArea, EncounterHistory encounterHistory) {
         initComponents();
         this.workArea = workArea;
+        this.encounterHistory = encounterHistory;
         lblWelcome.setText("Welcome to Encounter History!");
-        
+        refreshTable(encounterHistory);
+    }
+    
+    public void refreshTable(EncounterHistory eh) {
+        DefaultTableModel model = (DefaultTableModel)tblEncounter.getModel();
+        model.setRowCount(0);
+
+        for(Encounter e : eh.getEncounterHistory()) {
+            Object row[] = new Object[6];
+            row[0] = e;
+            row[1] = e.getPressure();
+            row[2] = e.getTemperature();
+            row[3] = e.getPulse();
+            row[4] = e.getDiagnose();
+            row[5] = e.getDate();
+            model.addRow(row);
+        }
     }
 
     /**
@@ -34,12 +58,12 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
 
         lblWelcome = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEncounter = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
 
         lblWelcome.setText("<Welcome Msg>");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEncounter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -58,9 +82,14 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblEncounter);
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,11 +118,22 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        back();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    void back(){
+        workArea.remove(this);
+        Component[] componentArray = workArea.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.previous(workArea);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblWelcome;
+    private javax.swing.JTable tblEncounter;
     // End of variables declaration//GEN-END:variables
 }

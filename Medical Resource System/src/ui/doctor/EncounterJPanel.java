@@ -5,8 +5,12 @@
 package ui.doctor;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Encounter;
+import model.EncounterHistory;
 
 /**
  *
@@ -18,7 +22,7 @@ public class EncounterJPanel extends javax.swing.JPanel {
      * Creates new form EncounterJPanel
      */
     JPanel workArea;
-    public EncounterJPanel(JPanel workArea1) {
+    public EncounterJPanel(JPanel workArea) {
         initComponents();
         this.workArea = workArea;
     }
@@ -155,13 +159,26 @@ public class EncounterJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please fill in the Patient ID first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        EncounterHistory encounterHistory = new EncounterHistory();
+        Encounter encounter = new Encounter();
+        
+        Date date = new Date(1990, 2, 22);
+//        date.setMonth(05);
+        
+        encounter.setDate(date);
+        encounter.setDiagnose("cold");
+        encounter.setId("Pat01");
+        encounter.setPressure(80);
+        encounter.setPulse(70);
+        encounter.setTemperature(37);
+        ArrayList<Encounter> list = new ArrayList<>();
+        list.add(encounter);
+        encounterHistory.setEncounterHistory(list);
         
         
         
-        
-        
-        EncounterHistoryJPanel panel = new EncounterHistoryJPanel(workArea);
-        workArea.add("AddDoctorJPanel", panel);
+        EncounterHistoryJPanel panel = new EncounterHistoryJPanel(workArea, encounterHistory);
+        workArea.add("EncounterHistoryJPanel", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
     }//GEN-LAST:event_btnViewHistoryActionPerformed

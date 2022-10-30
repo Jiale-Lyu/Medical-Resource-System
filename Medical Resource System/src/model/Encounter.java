@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Jiale Lyu
  */
 public class Encounter {
-    private int id;
+    private String id;
     private Date date;
     private int pulse;
     private int pressure;
@@ -22,7 +22,7 @@ public class Encounter {
         
     }
 
-    public Encounter(int id, Date date, int pulse, int pressure, int temperature, String diagnose) {
+    public Encounter(String id, Date date, int pulse, int pressure, int temperature, String diagnose) {
         this.id = id;
         this.date = date;
         this.pulse = pulse;
@@ -31,11 +31,11 @@ public class Encounter {
         this.diagnose = diagnose;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -78,5 +78,8 @@ public class Encounter {
     public void setDiagnose(String diagnose) {
         this.diagnose = diagnose;
     }
-    
+    @Override
+    public String toString(){
+        return id;
+    }
 }
