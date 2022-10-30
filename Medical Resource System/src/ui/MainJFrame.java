@@ -5,6 +5,8 @@
 package ui;
 
 import java.awt.CardLayout;
+import model.Doctor;
+import model.DoctorDirectory;
 import ui.admin.AdminWorkAreaJPanel;
 
 /**
@@ -19,13 +21,15 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         
+        
         setSize(800,600);
         setResizable(false);
-       this.setLocationRelativeTo(null);
-        
+        this.setLocationRelativeTo(null);
         setLoginScreen();
     }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

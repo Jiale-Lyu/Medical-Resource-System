@@ -24,7 +24,13 @@ public class PatientDirectory {
     public void setPatientDirectory(ArrayList<Patient> patientDirectory) {
         this.patientDirectory = patientDirectory;
     }
+    public boolean addPatient(Patient patient){
+        return  patientDirectory.add(patient);
+    }
     
+    public void removePatient(Patient patient) {
+        patientDirectory.remove(patient);
+    }
     
    
 }

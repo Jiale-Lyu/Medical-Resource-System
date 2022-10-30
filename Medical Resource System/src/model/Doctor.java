@@ -4,11 +4,34 @@
  */
 package model;
 
+import java.util.jar.Attributes;
+
 /**
  *
  * @author Jiale Lyu
  */
-public class Doctor {
+public class Doctor extends Person{
+
+    private String city;
+   
+
+    public Doctor(String id, String name, String gender, int age, String city) {
+        super(id, name, gender, age, city);
+    }
+    
+    public Doctor() {
+
+    }
+
+
+
+
+//    @Override
+//    public String toString() {
+////        return String.valueOf(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+//        return String.valueOf(id);
+//    }
+    
     
     
 }

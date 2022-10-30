@@ -6,7 +6,12 @@ package ui;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import model.Doctor;
+import model.DoctorDirectory;
+import model.Patient;
+import model.PatientDirectory;
 import ui.admin.AdminWorkAreaJPanel;
+import ui.doctor.DoctorJPanel;
 
 /**
  *
@@ -15,12 +20,27 @@ import ui.admin.AdminWorkAreaJPanel;
 public class LoginJPanel extends javax.swing.JPanel {
 
     JPanel mainWorkArea;
+    DoctorDirectory doctorDirectory = new DoctorDirectory();
+
+    PatientDirectory patientDirectory = new PatientDirectory();
     /**
      * Creates new form LoginJPanel
      */
     public LoginJPanel(JPanel mainWorkArea) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
+        setTestData();
+    }
+    
+    public void setTestData(){
+        Doctor amy = new Doctor("doc01","Amy", "Female", 30, "Boston");
+        Doctor bob = new Doctor("doc02", "Bob", "Male", 20, "Chicago");
+        doctorDirectory.addDoctor(amy);
+        doctorDirectory.addDoctor(bob);
+        Patient dan = new Patient("Pat01", "Dan", "Male", 40, "Boston");
+        Patient Evan = new Patient("Pat02", "Evan", "Male", 50, "Chicago");
+        patientDirectory.addPatient(dan);
+        patientDirectory.addPatient(Evan);
     }
 
     /**
@@ -41,8 +61,10 @@ public class LoginJPanel extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSignIn = new javax.swing.JButton();
+        btnSignUp = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(800, 600));
 
@@ -108,21 +130,27 @@ public class LoginJPanel extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password.png"))); // NOI18N
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 50, 50));
 
-        jButton1.setText("Sign in");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSignIn.setText("Sign in");
+        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSignInActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, -1, -1));
+        jPanel3.add(btnSignIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, -1, -1));
 
-        jButton2.setText("Sign up");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSignUp.setText("Sign up");
+        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSignUpActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
+        jPanel3.add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
+
+        jLabel3.setText("Login as:");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System Admin", "Hospital Admin", "Community Admin", "Doctor", "Patient" }));
+        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 210, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,25 +201,30 @@ public class LoginJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JPanel selectedJPanel = new AdminWorkAreaJPanel(mainWorkArea);
+    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
+        JPanel selectedJPanel = new AdminWorkAreaJPanel(mainWorkArea, doctorDirectory, patientDirectory);
 //        JPanel selectedJPanel = new AdminJPanel(mainWorkArea);
         mainWorkArea.add("WorkAreaJPanel", selectedJPanel);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSignInActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
+        JPanel selectedJPanel = new DoctorJPanel(mainWorkArea);
+        mainWorkArea.add("DoctorJPanel", selectedJPanel);
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.next(mainWorkArea);
+    }//GEN-LAST:event_btnSignUpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnSignIn;
+    private javax.swing.JButton btnSignUp;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -5,6 +5,7 @@
 package model;
 
 import java.util.ArrayList;
+//import java.util.List;
 
 /**
  *
@@ -17,6 +18,10 @@ public class DoctorDirectory {
         doctorDirectory = new ArrayList<Doctor>();
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Doctor> getDoctorDirectory() {
         return doctorDirectory;
     }
@@ -25,7 +30,21 @@ public class DoctorDirectory {
         this.doctorDirectory = doctorDirectory;
     }
     
-    public void addDoctor(Doctor doctor){
-        doctorDirectory.add(doctor);
+//    public Doctor addDoctor(){
+//        Doctor newDoctor = new Doctor("bbb","ccc",25);
+//        doctorDirectory.add(newDoctor);
+//        return newDoctor;
+//    }
+    public boolean addDoctor(Doctor doctor){
+//        Doctor newDoctor = new Doctor(name,gender,age);
+//        newDoctor.setName(name);
+//        newDoctor.setAge(age);
+//        newDoctor.setGender(gender);
+       
+        return  doctorDirectory.add(doctor);
+    }
+    
+    public void removeDoctor(Doctor doctor) {
+        doctorDirectory.remove(doctor);
     }
 }

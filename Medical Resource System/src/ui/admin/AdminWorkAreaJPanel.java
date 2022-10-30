@@ -10,8 +10,12 @@ package ui.admin;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
+import model.DoctorDirectory;
+import model.PatientDirectory;
 import ui.LoginJPanel;
+import ui.community.CommunityJPanel;
 import ui.doctor.DoctorJPanel;
+import ui.hospital.HospitalAdminJPanel;
 import ui.patient.PatientJPanel;
 
 /**
@@ -20,14 +24,14 @@ import ui.patient.PatientJPanel;
  */
 public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     JPanel mainWorkArea;
-//    SupplierDirectory supplierDirectory;
-    
+    DoctorDirectory doctorDirectory;
+    PatientDirectory patientDirectory;
     /** Creates new form AdminWorkAreaJPanel */
-    public AdminWorkAreaJPanel(JPanel mainWorkArea) {
+    public AdminWorkAreaJPanel(JPanel mainWorkArea, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
-//        this.supplierDirectory = supplierDirectory;
-        
+        this.doctorDirectory = doctorDirectory;
+        this.patientDirectory = patientDirectory;
         lblWelcome.setText("Welcome to System Admin!");
     }
     
@@ -46,8 +50,10 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         lblWelcome = new javax.swing.JLabel();
         workArea = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnDoctor = new javax.swing.JButton();
+        btnPatient = new javax.swing.JButton();
+        btnCommunity = new javax.swing.JButton();
+        btnHospital = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
@@ -102,17 +108,31 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         workArea.setBackground(new java.awt.Color(255, 255, 255));
         workArea.setLayout(new java.awt.CardLayout());
 
-        jButton1.setText("Manage Doctor");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDoctor.setText("Doctor");
+        btnDoctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDoctorActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Manage Patient");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnPatient.setText("Patient");
+        btnPatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnPatientActionPerformed(evt);
+            }
+        });
+
+        btnCommunity.setText("Community Admin");
+        btnCommunity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCommunityActionPerformed(evt);
+            }
+        });
+
+        btnHospital.setText("Hospital Admin");
+        btnHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHospitalActionPerformed(evt);
             }
         });
 
@@ -120,11 +140,15 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(108, 108, 108)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCommunity)
+                    .addComponent(btnDoctor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPatient, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnHospital, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(135, 135, 135))
         );
         jPanel1Layout.setVerticalGroup(
@@ -132,9 +156,13 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(407, Short.MAX_VALUE))
+                    .addComponent(btnDoctor)
+                    .addComponent(btnPatient))
+                .addGap(66, 66, 66)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCommunity)
+                    .addComponent(btnHospital))
+                .addContainerGap(300, Short.MAX_VALUE))
         );
 
         workArea.add(jPanel1, "card2");
@@ -167,19 +195,33 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
                 
     }//GEN-LAST:event_btnLogOutActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoctorActionPerformed
        DoctorJPanel doctorJPanel = new DoctorJPanel(mainWorkArea);
        mainWorkArea.add("doctorJPanel", doctorJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnDoctorActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientActionPerformed
        PatientJPanel patientJPanel = new PatientJPanel(mainWorkArea);
        mainWorkArea.add("patientJPanel", patientJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnPatientActionPerformed
+
+    private void btnCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommunityActionPerformed
+       CommunityJPanel communityJPanel = new CommunityJPanel(mainWorkArea);
+       mainWorkArea.add("communityJPanel", communityJPanel);
+       CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+       layout.next(mainWorkArea);
+    }//GEN-LAST:event_btnCommunityActionPerformed
+
+    private void btnHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHospitalActionPerformed
+        HospitalAdminJPanel hospitalAdminJPanel = new HospitalAdminJPanel(mainWorkArea, doctorDirectory, patientDirectory);
+       mainWorkArea.add("hospitalJPanel", hospitalAdminJPanel);
+       CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+       layout.next(mainWorkArea);
+    }//GEN-LAST:event_btnHospitalActionPerformed
 
     @Override
     public String toString(){
@@ -187,10 +229,12 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCommunity;
+    private javax.swing.JButton btnDoctor;
+    private javax.swing.JButton btnHospital;
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnManageSuppliers;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnPatient;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblWelcome;
     private javax.swing.JPanel menuBar;

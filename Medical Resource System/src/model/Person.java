@@ -8,18 +8,33 @@ package model;
  *
  * @author Jiale Lyu
  */
-enum Gender{
-    FEMALE, MALE;
-}
-public class Person {
-    String name;
-    Gender gender;
-    int age;
 
-    public Person(String name, Gender gender, int age) {
+public class Person {
+    private String id;
+    private String name;
+    private String gender;
+    private int age;
+    private String city;
+    private String username;
+    private String password;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Person(String id, String name, String gender, int age, String city) {
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.age = age;
+        this.city = city;
+    }
+    public Person(){
+        
     }
 
     public String getName() {
@@ -30,13 +45,39 @@ public class Person {
         this.name = name;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+
 
     public int getAge() {
         return age;
@@ -45,6 +86,9 @@ public class Person {
     public void setAge(int age) {
         this.age = age;
     }
-    
+    @Override
+    public String toString(){
+        return id;
+    }
     
 }
