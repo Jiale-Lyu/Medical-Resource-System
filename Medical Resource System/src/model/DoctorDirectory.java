@@ -47,4 +47,8 @@ public class DoctorDirectory {
     public void removeDoctor(Doctor doctor) {
         doctorDirectory.remove(doctor);
     }
+    
+    public boolean isEmpty(){
+        return doctorDirectory.isEmpty();
+    }
 }

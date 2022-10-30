@@ -7,7 +7,13 @@ package ui.patient;
 import ui.doctor.*;
 import java.awt.CardLayout;
 import java.awt.Component;
+import static java.lang.System.in;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.Doctor;
+import model.DoctorDirectory;
 
 /**
  *
@@ -19,9 +25,12 @@ public class PatientJPanel extends javax.swing.JPanel {
      * Creates new form PatientJPanel
      */
     JPanel mainWorkArea;
-    public PatientJPanel(JPanel mainWorkArea) {
+    DoctorDirectory doctorDirectory;
+    private String selectedCity;
+    public PatientJPanel(JPanel mainWorkArea, DoctorDirectory dd) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
+        doctorDirectory = dd;
         lblWelcome.setText("Welcome to Patient page!");
     }
 
@@ -42,10 +51,10 @@ public class PatientJPanel extends javax.swing.JPanel {
         workArea = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        doctorTable = new javax.swing.JTable();
+        btnSearch = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboBox = new javax.swing.JComboBox<>();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -97,7 +106,7 @@ public class PatientJPanel extends javax.swing.JPanel {
 
         workArea.setLayout(new java.awt.CardLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        doctorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -105,16 +114,34 @@ public class PatientJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Name", "Gender", "City"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        jButton1.setText("Search");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(doctorTable);
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("City:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "Chicago" }));
+        comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,9 +153,9 @@ public class PatientJPanel extends javax.swing.JPanel {
                         .addGap(176, 176, 176)
                         .addComponent(jLabel1)
                         .addGap(53, 53, 53)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(83, 83, 83)
-                        .addComponent(jButton1))
+                        .addComponent(btnSearch))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -139,9 +166,9 @@ public class PatientJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnSearch)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(145, Short.MAX_VALUE))
@@ -173,17 +200,50 @@ public class PatientJPanel extends javax.swing.JPanel {
         layout.previous(mainWorkArea);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
+       selectedCity = comboBox.getSelectedItem().toString();
+    }//GEN-LAST:event_comboBoxActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+//        ArrayList<Doctor> list = new ArrayList<>();
+        DoctorDirectory list = new DoctorDirectory();
+        for(Doctor d : doctorDirectory.getDoctorDirectory()){
+            if(selectedCity.equals("Boston")){
+                list.addDoctor(d);
+            }
+        }
+        if(!list.isEmpty()){
+            refreshTable(list);
+        }else{
+            JOptionPane.showMessageDialog(this, "no such data.");
+        }
+        
+    }//GEN-LAST:event_btnSearchActionPerformed
+    public void refreshTable(DoctorDirectory dd) {
+        DefaultTableModel model = (DefaultTableModel)doctorTable.getModel();
+        model.setRowCount(0);
+
+        for(Doctor d : dd.getDoctorDirectory()) {
+            Object row[] = new Object[4];
+            row[0] = d;
+            row[1] = d.getName();
+            row[2] = d.getGender();
+            row[3] = d.getCity();
+           // row[1] = s.getProductCatalog().getProductCount() == 0 ? "None" : s.getProductCatalog().getProductCount();
+            model.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnManageProfile;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JComboBox<String> comboBox;
+    private javax.swing.JTable doctorTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblWelcome;
     private javax.swing.JPanel menuBar;
     private javax.swing.JPanel workArea;

@@ -10,9 +10,7 @@ package model;
  */
 public class Patient extends Person{
     
-    private int pulse;
-    private int pressure;
-    private int temperature;
+    EncounterHistory history;
     
     public Patient(String id, String name, String gender, int age, String city) {
         super(id, name, gender, age, city);
@@ -21,29 +19,15 @@ public class Patient extends Person{
     public Patient(){
         
     }
-    public int getPulse() {
-        return pulse;
+
+    public EncounterHistory getHistory() {
+        return history;
     }
 
-    public void setPulse(int pulse) {
-        this.pulse = pulse;
+    public void setHistory(EncounterHistory history) {
+        this.history = history;
     }
-
-    public int getPressure() {
-        return pressure;
-    }
-
-    public void setPressure(int pressure) {
-        this.pressure = pressure;
-    }
-
-    public int getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(int temperature) {
-        this.temperature = temperature;
-    }
+   
     
     
 }

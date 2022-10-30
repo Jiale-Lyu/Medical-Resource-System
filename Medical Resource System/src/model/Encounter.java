@@ -4,10 +4,79 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author Jiale Lyu
  */
 public class Encounter {
+    private int id;
+    private Date date;
+    private int pulse;
+    private int pressure;
+    private int temperature;
+    private String diagnose;
+    
+    public Encounter(){
+        
+    }
+
+    public Encounter(int id, Date date, int pulse, int pressure, int temperature, String diagnose) {
+        this.id = id;
+        this.date = date;
+        this.pulse = pulse;
+        this.pressure = pressure;
+        this.temperature = temperature;
+        this.diagnose = diagnose;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getPulse() {
+        return pulse;
+    }
+
+    public void setPulse(int pulse) {
+        this.pulse = pulse;
+    }
+
+    public int getPressure() {
+        return pressure;
+    }
+
+    public void setPressure(int pressure) {
+        this.pressure = pressure;
+    }
+
+    public int getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
+
+    public String getDiagnose() {
+        return diagnose;
+    }
+
+    public void setDiagnose(String diagnose) {
+        this.diagnose = diagnose;
+    }
     
 }

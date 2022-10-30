@@ -203,7 +203,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDoctorActionPerformed
 
     private void btnPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientActionPerformed
-       PatientJPanel patientJPanel = new PatientJPanel(mainWorkArea);
+       PatientJPanel patientJPanel = new PatientJPanel(mainWorkArea, doctorDirectory);
        mainWorkArea.add("patientJPanel", patientJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);
