@@ -147,32 +147,29 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(274, 274, 274)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(311, 311, 311)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnPatient)
-                            .addComponent(btnDoctor)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(btnHospital))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(btnCommunity)))
-                .addContainerGap(314, Short.MAX_VALUE))
+                    .addComponent(btnCommunity)
+                    .addComponent(btnDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHospital)
+                    .addComponent(btnPatient))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCommunity, btnDoctor, btnHospital, btnPatient});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(73, 73, 73)
                 .addComponent(btnDoctor)
                 .addGap(33, 33, 33)
                 .addComponent(btnPatient)
-                .addGap(46, 46, 46)
+                .addGap(39, 39, 39)
                 .addComponent(btnHospital)
-                .addGap(50, 50, 50)
+                .addGap(47, 47, 47)
                 .addComponent(btnCommunity)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         workArea.add(jPanel1, "card2");

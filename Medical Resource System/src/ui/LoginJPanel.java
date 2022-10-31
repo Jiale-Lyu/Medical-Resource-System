@@ -207,7 +207,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 30, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password.png"))); // NOI18N
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 50, 50));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 30, 40));
 
         btnSignIn.setText("Sign in");
         btnSignIn.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +226,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         jPanel3.add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
 
         jLabel3.setText("Login as:");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System Admin", "Hospital Admin", "Community Admin", "Doctor", "Patient" }));
         comboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -234,7 +234,7 @@ public class LoginJPanel extends javax.swing.JPanel {
                 comboBoxActionPerformed(evt);
             }
         });
-        jPanel3.add(comboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 210, -1));
+        jPanel3.add(comboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 210, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
