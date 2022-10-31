@@ -19,6 +19,7 @@ import model.PersonDirectory;
 import ui.admin.AdminWorkAreaJPanel;
 import ui.community.CommunityJPanel;
 import ui.doctor.DoctorJPanel;
+import ui.doctor.ProfileJPanel;
 import ui.hospital.HospitalAdminJPanel;
 import ui.patient.PatientJPanel;
 
@@ -322,8 +323,8 @@ public class LoginJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
-        JPanel selectedJPanel = new DoctorJPanel(mainWorkArea, encounterHistory);
-        mainWorkArea.add("DoctorJPanel", selectedJPanel);
+        JPanel selectedJPanel = new ProfileJPanel(mainWorkArea);
+        mainWorkArea.add("ProfileJPanel", selectedJPanel);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
     }//GEN-LAST:event_btnSignUpActionPerformed
