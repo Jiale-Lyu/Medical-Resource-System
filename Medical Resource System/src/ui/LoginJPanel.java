@@ -14,6 +14,7 @@ import model.Encounter;
 import model.EncounterHistory;
 import model.Patient;
 import model.PatientDirectory;
+import model.Person;
 import model.PersonDirectory;
 import ui.admin.AdminWorkAreaJPanel;
 import ui.community.CommunityJPanel;
@@ -57,15 +58,25 @@ public class LoginJPanel extends javax.swing.JPanel {
         
         //Patient data
         Patient dan = new Patient("Pat01", "Dan", "Male", 40, "Boston");
-        Patient Evan = new Patient("Pat02", "Evan", "Male", 50, "Chicago");
+        Patient evan = new Patient("Pat02", "Evan", "Male", 50, "Chicago");
         patientDirectory.addPatient(dan);
-        patientDirectory.addPatient(Evan);
+        patientDirectory.addPatient(evan);
         
         //Person data
         dan.setId("Per01");
         dan.setIlled(true);
         dan.setCommunity("Fenway");
         personDirectory.addPerson(dan);
+        
+        evan.setId("Per02");
+        evan.setIlled(true);
+        evan.setCommunity("Fairborn");
+        personDirectory.addPerson(evan);
+        
+        Person zoe = new Person("Per03", "Zoe", "Female", 22, "Seattle");
+        zoe.setIlled(false);
+        zoe.setCommunity("Highland");
+        personDirectory.addPerson(zoe);
 
         Encounter encounter = new Encounter();
         Date date = new Date();
