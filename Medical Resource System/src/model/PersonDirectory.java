@@ -13,8 +13,31 @@ import java.util.ArrayList;
 public class PersonDirectory {
     ArrayList<Person> personDirectory;
     
-    PersonDirectory(){
+    public PersonDirectory(){
         personDirectory = new ArrayList<Person>();
+    }
+
+    public ArrayList<Person> getPersonDirectory() {
+        return personDirectory;
+    }
+
+    public void setPersonDirectory(ArrayList<Person> personDirectory) {
+        this.personDirectory = personDirectory;
+    }
+    
+    public boolean addPerson(Person person){
+        return  personDirectory.add(person);
+    }
+    
+    public void removePerson(Person person) {
+        personDirectory.remove(person);
+    }
+    
+    public boolean isEmpty(){
+        return personDirectory.isEmpty();
+    }
+    public int getSize(){
+       return personDirectory.size();
     }
 
 }

@@ -17,6 +17,34 @@ public class Person {
     private String city;
     private String username;
     private String password;
+    private String phone;
+    private Boolean illed;
+    private String community;
+    private String Address;
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String Address) {
+        this.Address = Address;
+    }
+
+    public Boolean getIlled() {
+        return illed;
+    }
+
+    public void setIlled(Boolean illed) {
+        this.illed = illed;
+    }
+
+    public String getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(String community) {
+        this.community = community;
+    }
 
     public String getId() {
         return id;
@@ -77,7 +105,13 @@ public class Person {
         this.city = city;
     }
 
+    public String getPhone() {
+        return phone;
+    }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public int getAge() {
         return age;

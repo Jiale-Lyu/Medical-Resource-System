@@ -82,7 +82,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnManageProfile">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Manage Profile"/>
+                <Property name="text" type="java.lang.String" value="Manage Login Info"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageProfileActionPerformed"/>

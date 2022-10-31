@@ -4,10 +4,12 @@
  */
 package ui.community;
 
-import ui.doctor.*;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.Person;
+import model.PersonDirectory;
 
 /**
  *
@@ -18,12 +20,30 @@ public class CommunityJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DoctorJPanel
      */
-    JPanel mainWorkArea;
-    public CommunityJPanel(JPanel mainWorkArea) {
+    private JPanel userProcessContainer;
+    private PersonDirectory personDirectory;
+    public CommunityJPanel(JPanel upc, PersonDirectory personDirectory) {
         initComponents();
-        this.mainWorkArea = mainWorkArea;
-        lblWelcome.setText("Welcome to Doctor Page!");
+        userProcessContainer = upc;
+        this.personDirectory = personDirectory;
+        lblWelcome.setText("Welcome to Community Admin Page!");
+        refreshTable(personDirectory);
         
+    }
+    
+    public void refreshTable(PersonDirectory pd) {
+        DefaultTableModel model = (DefaultTableModel)tblCommunity.getModel();
+        model.setRowCount(0);
+
+        for(Person p : pd.getPersonDirectory()) {
+            Object row[] = new Object[5];
+            row[0] = p;
+            row[1] = p.getName();
+            row[2] = p.getIlled();
+            row[3] = p.getGender();
+            row[4] = p.getCommunity();
+            model.addRow(row);
+        }
     }
 
     /**
@@ -43,7 +63,7 @@ public class CommunityJPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCommunity = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -90,21 +110,26 @@ public class CommunityJPanel extends javax.swing.JPanel {
 
         tblCommunity.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "House ID", "Name", "Illed", "Gender"
+                "Person ID", "Name", "Illed", "Gender", "Community"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblCommunity);
 
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
@@ -121,18 +146,18 @@ public class CommunityJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(jButton1)
+                        .addComponent(btnAdd)
                         .addGap(43, 43, 43)
                         .addComponent(jButton2)
                         .addGap(35, 35, 35)
                         .addComponent(jButton3)
                         .addGap(36, 36, 36)
-                        .addComponent(jButton4)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                        .addComponent(jButton4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +166,7 @@ public class CommunityJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnAdd)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
@@ -156,27 +181,27 @@ public class CommunityJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        mainWorkArea.remove(this);
-        Component[] componentArray = mainWorkArea.getComponents();
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
 //        LoginJPanel loginPanel = (LoginJPanel) component;
 //        loginPanel.populateSupplierCombo();
         
-        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-        layout.previous(mainWorkArea);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AddPersonJPanel panel = new AddPersonJPanel(workArea);
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        AddPersonJPanel panel = new AddPersonJPanel(userProcessContainer, personDirectory);
         workArea.add("AddPersonJPanel", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

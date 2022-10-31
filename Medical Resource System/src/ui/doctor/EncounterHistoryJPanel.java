@@ -6,6 +6,7 @@ package ui.doctor;
 
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.text.SimpleDateFormat;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.StyleConstants;
@@ -23,6 +24,7 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
      */
     JPanel workArea;
     EncounterHistory encounterHistory;
+//    SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
     public EncounterHistoryJPanel(JPanel workArea, EncounterHistory encounterHistory) {
         initComponents();
         this.workArea = workArea;

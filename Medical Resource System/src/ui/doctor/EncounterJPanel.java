@@ -5,8 +5,12 @@
 package ui.doctor;
 
 import java.awt.CardLayout;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Encounter;
@@ -22,9 +26,12 @@ public class EncounterJPanel extends javax.swing.JPanel {
      * Creates new form EncounterJPanel
      */
     JPanel workArea;
-    public EncounterJPanel(JPanel workArea) {
+    EncounterHistory encounterHistory;
+    public EncounterJPanel(JPanel workArea, EncounterHistory encounterHistory) {
         initComponents();
         this.workArea = workArea;
+        this.encounterHistory = encounterHistory;
+        
     }
 
     /**
@@ -41,14 +48,14 @@ public class EncounterJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txtPressure = new javax.swing.JTextField();
+        txtTemperature = new javax.swing.JTextField();
+        txtPulse = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDiagnose = new javax.swing.JTextArea();
         btnViewHistory = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
 
         jLabel1.setText("Patient ID");
 
@@ -58,17 +65,17 @@ public class EncounterJPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Pulse");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtTemperature.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtTemperatureActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Diagnose");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtDiagnose.setColumns(20);
+        txtDiagnose.setRows(5);
+        jScrollPane1.setViewportView(txtDiagnose);
 
         btnViewHistory.setText("View Encounter History");
         btnViewHistory.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +84,12 @@ public class EncounterJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("Save");
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,11 +101,11 @@ public class EncounterJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPulse, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -101,7 +113,7 @@ public class EncounterJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtID)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))))
+                            .addComponent(txtPressure, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -114,7 +126,7 @@ public class EncounterJPanel extends javax.swing.JPanel {
                 .addGap(122, 122, 122)
                 .addComponent(btnViewHistory)
                 .addGap(140, 140, 140)
-                .addComponent(jButton2)
+                .addComponent(btnSave)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,49 +145,28 @@ public class EncounterJPanel extends javax.swing.JPanel {
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPressure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtPulse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnViewHistory)
-                    .addComponent(jButton2))
+                    .addComponent(btnSave))
                 .addGap(89, 89, 89))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtTemperatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTemperatureActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtTemperatureActionPerformed
 
     private void btnViewHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewHistoryActionPerformed
-        if(txtID.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please fill in the Patient ID first", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        EncounterHistory encounterHistory = new EncounterHistory();
-        Encounter encounter = new Encounter();
-        
-        Date date = new Date(1990, 2, 22);
-//        date.setMonth(05);
-        
-        encounter.setDate(date);
-        encounter.setDiagnose("cold");
-        encounter.setId("Pat01");
-        encounter.setPressure(80);
-        encounter.setPulse(70);
-        encounter.setTemperature(37);
-        ArrayList<Encounter> list = new ArrayList<>();
-        list.add(encounter);
-        encounterHistory.setEncounterHistory(list);
-        
-        
         
         EncounterHistoryJPanel panel = new EncounterHistoryJPanel(workArea, encounterHistory);
         workArea.add("EncounterHistoryJPanel", panel);
@@ -183,20 +174,43 @@ public class EncounterJPanel extends javax.swing.JPanel {
         layout.next(workArea);
     }//GEN-LAST:event_btnViewHistoryActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        Encounter encounter = new Encounter();
+        Date date = new Date();
+        encounter.setDate(date);
+        encounter.setDiagnose(txtDiagnose.getText());
+        encounter.setId(txtID.getText());
+        encounter.setPressure(Integer.parseInt(txtPressure.getText()));
+        encounter.setPulse(Integer.parseInt(txtPulse.getText()));
+        encounter.setTemperature(Double.parseDouble(txtTemperature.getText()));
+        encounterHistory.addEncounter(encounter);
+        
+        if(txtID.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please fill in the Patient ID first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "Successfully Saved!", "Warning", JOptionPane.WARNING_MESSAGE);
+        txtID.setText("");
+        txtDiagnose.setText("");
+        txtPressure.setText("");
+        txtPulse.setText("");
+        txtTemperature.setText("");
+    }//GEN-LAST:event_btnSaveActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnViewHistory;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextArea txtDiagnose;
     private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtPressure;
+    private javax.swing.JTextField txtPulse;
+    private javax.swing.JTextField txtTemperature;
     // End of variables declaration//GEN-END:variables
 }

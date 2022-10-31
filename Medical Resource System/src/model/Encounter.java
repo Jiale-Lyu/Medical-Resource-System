@@ -15,14 +15,14 @@ public class Encounter {
     private Date date;
     private int pulse;
     private int pressure;
-    private int temperature;
+    private double temperature;
     private String diagnose;
     
     public Encounter(){
         
     }
 
-    public Encounter(String id, Date date, int pulse, int pressure, int temperature, String diagnose) {
+    public Encounter(String id, Date date, int pulse, int pressure, double temperature, String diagnose) {
         this.id = id;
         this.date = date;
         this.pulse = pulse;
@@ -63,11 +63,11 @@ public class Encounter {
         this.pressure = pressure;
     }
 
-    public int getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(int temperature) {
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 

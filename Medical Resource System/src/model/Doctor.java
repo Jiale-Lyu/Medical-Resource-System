@@ -23,9 +23,6 @@ public class Doctor extends Person{
 
     }
 
-
-
-
 //    @Override
 //    public String toString() {
 ////        return String.valueOf(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody

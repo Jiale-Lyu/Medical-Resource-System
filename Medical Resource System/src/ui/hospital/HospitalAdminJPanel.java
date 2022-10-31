@@ -29,7 +29,7 @@ public class HospitalAdminJPanel extends javax.swing.JPanel {
         this.mainWorkArea = mainWorkArea;
         this.doctorDirectory = doctorDirectory;
         this.patientDirectory = patientDirectory;
-        lblWelcome.setText("Welcome to Doctor Page!");
+        lblWelcome.setText("Welcome to Hospital Admin Page!");
     }
 
     /**

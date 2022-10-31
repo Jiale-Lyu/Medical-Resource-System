@@ -11,7 +11,9 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
 import model.DoctorDirectory;
+import model.EncounterHistory;
 import model.PatientDirectory;
+import model.PersonDirectory;
 import ui.LoginJPanel;
 import ui.community.CommunityJPanel;
 import ui.doctor.DoctorJPanel;
@@ -26,12 +28,16 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     JPanel mainWorkArea;
     DoctorDirectory doctorDirectory;
     PatientDirectory patientDirectory;
+    EncounterHistory encounterHistory;
+    PersonDirectory personDirectory;
     /** Creates new form AdminWorkAreaJPanel */
-    public AdminWorkAreaJPanel(JPanel mainWorkArea, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory) {
+    public AdminWorkAreaJPanel(JPanel mainWorkArea, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory, EncounterHistory encounterHistory, PersonDirectory personDirectory) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
         this.doctorDirectory = doctorDirectory;
         this.patientDirectory = patientDirectory;
+        this.encounterHistory = encounterHistory;
+        this.personDirectory = personDirectory;
         lblWelcome.setText("Welcome to System Admin!");
     }
     
@@ -141,28 +147,32 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCommunity)
-                    .addComponent(btnDoctor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPatient, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnHospital, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(135, 135, 135))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(311, 311, 311)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnPatient)
+                            .addComponent(btnDoctor)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(274, 274, 274)
+                        .addComponent(btnHospital))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(258, 258, 258)
+                        .addComponent(btnCommunity)))
+                .addContainerGap(314, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDoctor)
-                    .addComponent(btnPatient))
-                .addGap(66, 66, 66)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCommunity)
-                    .addComponent(btnHospital))
-                .addContainerGap(300, Short.MAX_VALUE))
+                .addGap(68, 68, 68)
+                .addComponent(btnDoctor)
+                .addGap(33, 33, 33)
+                .addComponent(btnPatient)
+                .addGap(46, 46, 46)
+                .addComponent(btnHospital)
+                .addGap(50, 50, 50)
+                .addComponent(btnCommunity)
+                .addContainerGap(180, Short.MAX_VALUE))
         );
 
         workArea.add(jPanel1, "card2");
@@ -196,7 +206,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void btnDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoctorActionPerformed
-       DoctorJPanel doctorJPanel = new DoctorJPanel(mainWorkArea);
+       DoctorJPanel doctorJPanel = new DoctorJPanel(mainWorkArea, encounterHistory);
        mainWorkArea.add("doctorJPanel", doctorJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);
@@ -210,7 +220,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPatientActionPerformed
 
     private void btnCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommunityActionPerformed
-       CommunityJPanel communityJPanel = new CommunityJPanel(mainWorkArea);
+       CommunityJPanel communityJPanel = new CommunityJPanel(mainWorkArea, personDirectory);
        mainWorkArea.add("communityJPanel", communityJPanel);
        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
        layout.next(mainWorkArea);

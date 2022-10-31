@@ -30,17 +30,8 @@ public class DoctorDirectory {
         this.doctorDirectory = doctorDirectory;
     }
     
-//    public Doctor addDoctor(){
-//        Doctor newDoctor = new Doctor("bbb","ccc",25);
-//        doctorDirectory.add(newDoctor);
-//        return newDoctor;
-//    }
+
     public boolean addDoctor(Doctor doctor){
-//        Doctor newDoctor = new Doctor(name,gender,age);
-//        newDoctor.setName(name);
-//        newDoctor.setAge(age);
-//        newDoctor.setGender(gender);
-       
         return  doctorDirectory.add(doctor);
     }
     
@@ -50,5 +41,8 @@ public class DoctorDirectory {
     
     public boolean isEmpty(){
         return doctorDirectory.isEmpty();
+    }
+    public int getSize(){
+       return doctorDirectory.size();
     }
 }

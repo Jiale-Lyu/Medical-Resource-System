@@ -32,6 +32,7 @@ public class PatientJPanel extends javax.swing.JPanel {
         this.mainWorkArea = mainWorkArea;
         doctorDirectory = dd;
         lblWelcome.setText("Welcome to Patient page!");
+        refreshTable(dd);
     }
 
     /**
@@ -62,7 +63,7 @@ public class PatientJPanel extends javax.swing.JPanel {
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnManageProfile.setText("Manage Profile");
+        btnManageProfile.setText("Manage Login Info");
         btnManageProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageProfileActionPerformed(evt);
@@ -85,11 +86,11 @@ public class PatientJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuBarLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(204, 204, 204)
+                .addGap(161, 161, 161)
                 .addComponent(btnManageProfile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(49, 49, 49)
                 .addComponent(btnBack)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         menuBarLayout.setVerticalGroup(
             menuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +137,7 @@ public class PatientJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("City:");
 
-        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "Chicago" }));
+        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "New York", "Boston", "Chicago" }));
         comboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxActionPerformed(evt);
@@ -159,7 +160,7 @@ public class PatientJPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,13 +206,13 @@ public class PatientJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_comboBoxActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-//        ArrayList<Doctor> list = new ArrayList<>();
         DoctorDirectory list = new DoctorDirectory();
         for(Doctor d : doctorDirectory.getDoctorDirectory()){
-            if(selectedCity.equals("Boston")){
+            if(d.getCity().equals(selectedCity)){
                 list.addDoctor(d);
             }
         }
+        System.out.println(list.getSize());
         if(!list.isEmpty()){
             refreshTable(list);
         }else{
@@ -229,7 +230,6 @@ public class PatientJPanel extends javax.swing.JPanel {
             row[1] = d.getName();
             row[2] = d.getGender();
             row[3] = d.getCity();
-           // row[1] = s.getProductCatalog().getProductCount() == 0 ? "None" : s.getProductCatalog().getProductCount();
             model.addRow(row);
         }
     }

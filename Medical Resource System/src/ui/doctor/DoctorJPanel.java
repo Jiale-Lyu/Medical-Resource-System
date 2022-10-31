@@ -7,6 +7,7 @@ package ui.doctor;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
+import model.EncounterHistory;
 
 /**
  *
@@ -18,9 +19,11 @@ public class DoctorJPanel extends javax.swing.JPanel {
      * Creates new form DoctorJPanel
      */
     JPanel mainWorkArea;
-    public DoctorJPanel(JPanel mainWorkArea) {
+    EncounterHistory encounterHistory;
+    public DoctorJPanel(JPanel mainWorkArea, EncounterHistory encounterHistory) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
+        this.encounterHistory = encounterHistory;
         lblWelcome.setText("Welcome to Doctor Page!");
     }
 
@@ -54,7 +57,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnManageProfile.setText("Manage Profile");
+        btnManageProfile.setText("Manage Login Info");
         btnManageProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageProfileActionPerformed(evt);
@@ -106,7 +109,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEncounterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncounterActionPerformed
-        EncounterJPanel panel = new EncounterJPanel(workArea);
+        EncounterJPanel panel = new EncounterJPanel(workArea, encounterHistory);
         workArea.add("EncounterJPanel", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
