@@ -9,5 +9,8 @@ User can login as System administrator, patient, doctor, hospital administrator,
 3. Community admins are able to modify the information under a community
 4. System admin should have all access(CRUD) to all resources in this application
 
-Here's the class diagram and sequence diagram of this project
+Here's the class diagram of this project
+![image](https://user-images.githubusercontent.com/113040940/198920730-b00c675a-1a63-4a7c-85c2-4ceb71fed7f4.png)
+
+The sequence diagram:
 ![image](https://user-images.githubusercontent.com/113040940/198881959-012a15a4-3a1b-442d-8d88-cb7ff16ae2ce.png)
