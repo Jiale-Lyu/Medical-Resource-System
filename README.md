@@ -9,8 +9,9 @@ User can login as System administrator, patient, doctor, hospital administrator,
 3. Community admins are able to modify the information under a community, including CRUD person under this community.
 4. System admin should have all access(CRUD) to all resources in this application.
 
-Programming Language: Java Swing
-Development Tool: Netbeans
+Programming Language: **Java Swing**
+
+Development Tool: **Netbeans**
 
 
 Here's the class diagram of this project
